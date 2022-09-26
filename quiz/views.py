@@ -1,5 +1,6 @@
 from rest_framework import generics
-from django_filters
+from django_filters.rest_framework import DjangoFilterBackend
+
 from .models import (
     Category,
     Quiz,
@@ -19,4 +20,6 @@ class CategoryList(generics.ListAPIView):
 
 class QuizList(generics.ListAPIView):
     queryset = Quiz.objects.all()
-    serializer_class = ''
+    serializer_class = QuizSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['category']
